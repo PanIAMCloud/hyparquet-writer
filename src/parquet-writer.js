@@ -73,7 +73,7 @@ export class ParquetWriter {
 
         // write columns
         for (let j = 0; j < columnData.length; j++) {
-          const { name, data, encoding, codec = this.codec, columnIndex = false, offsetIndex = true, shredding, bloomFilter } = columnData[j]
+          const { name, data, encoding, codec = this.codec, columnIndex = false, offsetIndex = true, shredding, bloomFilter, statistics = this.statistics } = columnData[j]
 
           // Spec: if ColumnIndex is present, OffsetIndex must also be present
           if (columnIndex && !offsetIndex) {
@@ -106,7 +106,7 @@ export class ParquetWriter {
               schemaPath,
               codec,
               compressors: this.compressors,
-              stats: this.statistics,
+              stats: statistics,
               pageSize,
               dictionarySize,
               columnIndex,
